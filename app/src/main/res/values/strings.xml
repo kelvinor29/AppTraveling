@@ -1,0 +1,54 @@
+<resources>
+    <!-- OnBoarding -->
+    <string name="app_name">Your Travel App</string>
+    <string name="welcome">Hello! We are looking for millions of users with a desire to travel. If this is you? Don\'t hesitate, access our App and discover thousands of destinations and facilities to rent a car, see the weather …</string>
+    <string name="skip">Skip</string>
+    <string name="next">Next</string>
+
+    <!-- Home Activity -->
+    <string name="la_coruna">" La coruña 1 - Yea"</string>
+    <string name="hi">Hi </string>
+    <string name="upcoming_meetups">Upcoming Meetups</string>
+    <string name="madives_3_weeks">Madives - 3 Weeks</string>
+    <string name="city_of_los_angeles">City of Los Angeles</string>
+    <string name="beach_vacation">Beach Vacation</string>
+    <string name="usa_los_angeles_2_weeks">USA, Los Angeles - 2 Weeks</string>
+    <string name="tokio_school" translatable="false">Tokio School</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="eurodisney" translatable="false">Euro DISNEY</string>
+
+    <!-- LogIn Fragment -->
+    <string name="log_in">LogIn</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Fortgot Password?</string>
+    <string name="have_an_account">Do you have an Account?</string>
+    <string name="create_new">Create New</string>
+    <string name="log_in_to_your_account">Login To Your Account</string>
+    <string name="welcome_login">Welcome, I hope you enjoy our App!</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="or_login_with">or log in with</string>
+    <string name="login_with_google">Login with Google</string>
+    <string name="back">Back</string>
+    <string name="username">Username</string>
+    <string name="camera">Camera</string>
+    <string name="register">Register</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="see_terms">Terms and conditions</string>
+    <string name="how_old_are_you">How old are you?</string>
+    <string name="errorUsername">It can only contain letters</string>
+    <string name="errorEmail">Oops, I don\'t think that\'s right, check it!</string>
+    <string name="errorEmptyInput">You must fill in this field</string>
+
+    <!-- Register Fragment -->
+    <string-array name="ages">
+        <item>0–5</item>
+        <item>6–11</item>
+        <item>12–17</item>
+        <item>+18</item>
+
+    </string-array>
+
+    <!-- RentCar Fragment -->
+    <string name="rentCar">Rent a Car</string>
+    <string name="email">Email</string>
+</resources>

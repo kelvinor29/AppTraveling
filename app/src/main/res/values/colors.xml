@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#141414</color>
+    <color name="white">#F5F5F5</color>
+
+    <color name="primary">#0C4270</color>
+    <color name="primary_variant">#0A375C</color>
+    <color name="primary_light_dark">#15568F</color>
+    <color name="primary_light">#C6DEF3</color>
+    <color name="secondary">#008080</color>
+    <color name="buttons">#008080</color>
+    <color name="texts">#333333</color>
+
+    <color name="transparent">#23FFFFFF</color>
+    <color name="grey">#d2d2d2</color>
+    <color name="beige">#F5F5DC</color>
+    <color name="lilac">#6C4675</color>
+
+</resources>
