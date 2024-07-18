@@ -4,6 +4,9 @@
     <string name="welcome">Hello! We are looking for millions of users with a desire to travel. If this is you? Don\'t hesitate, access our App and discover thousands of destinations and facilities to rent a car, see the weather …</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcoming">We\'ve helped millions across the nation find their perfect match… and you\'re next!</string>
+    <string name="findYourMatch">Find Your Match!</string>
 
     <!-- Home Activity -->
     <string name="la_coruna">" La coruña 1 - Yea"</string>
@@ -28,6 +31,11 @@
     <string name="remember_me">Remember Me</string>
     <string name="or_login_with">or log in with</string>
     <string name="login_with_google">Login with Google</string>
+    <string name="errorCharacterers">Must contain at least 5 characters</string>
+    <string name="errorPasswordLogIn">Password doesn\'t match</string>
+
+    <!-- Register Fragment -->
+
     <string name="back">Back</string>
     <string name="username">Username</string>
     <string name="camera">Camera</string>
@@ -39,7 +47,6 @@
     <string name="errorEmail">Oops, I don\'t think that\'s right, check it!</string>
     <string name="errorEmptyInput">You must fill in this field</string>
 
-    <!-- Register Fragment -->
     <string-array name="ages">
         <item>0–5</item>
         <item>6–11</item>
@@ -51,4 +58,6 @@
     <!-- RentCar Fragment -->
     <string name="rentCar">Rent a Car</string>
     <string name="email">Email</string>
+    <string name="find_the_perfect_roommate">Find the Perfect Roommate</string>
+
 </resources>

@@ -85,9 +85,10 @@ public class LoginFragment extends Fragment {
         boolean isPasswordCorrect = binding.tietPasswordTyped.getText().toString().equals(userPassword);
 
         binding.tilUsernameTyped.setError(isUsernameValid ? null : getString(R.string.errorUsername));
-        binding.tilPasswordTyped.setError(isPasswordValid ? null : "Debe de contener al menos 5 carácteres");
-        binding.tilPasswordTyped.setError(isPasswordCorrect ? null : "La contraseña no coincide.");
+        binding.tilPasswordTyped.setError(isPasswordValid ? null : getString(R.string.errorCharacterers));
+        binding.tilPasswordTyped.setError(isPasswordCorrect ? null : getString(R.string.errorPasswordLogIn));
 
+        //Cambiar esto antes de enviar la tarea
         //binding.bLogIn.setEnabled(isUsernameValid && isUserNameCorrect && isPasswordValid && isPasswordCorrect);
         binding.bLogIn.setEnabled(true);
     }

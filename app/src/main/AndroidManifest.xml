@@ -24,7 +24,7 @@
             android:name=".feature.home.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.boarding.BoardingOneActivity"
+            android:name=".feature.boarding.activity.OnBoardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
