@@ -16,4 +16,13 @@
     <color name="beige">#F5F5DC</color>
     <color name="lilac">#6C4675</color>
 
+    <color name="classicCar">#966847</color>
+    <color name="sportCar">#FF039BE5</color>
+    <color name="motorhomeCar">#4CB191</color>
+    <color name="flyingCar">#FFAB91</color>
+    <color name="electricCar">#C5E1A5</color>
+    <color name="pickUpCar">#AA7B59</color>
+    <color name="airPlane">#BF372D</color>
+    <color name="busCar">#FFC107</color>
+
 </resources>

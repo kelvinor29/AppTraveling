@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.kelvin.apptraveling.R;
+import com.kelvin.apptraveling.database.User;
 import com.kelvin.apptraveling.databinding.FragmentLoginBinding;
 import com.kelvin.apptraveling.feature.home.activity.HomeActivity;
 import com.kelvin.apptraveling.feature.login.activity.LoginActivity;
@@ -21,10 +23,7 @@ import com.kelvin.apptraveling.feature.login.activity.LoginActivity;
 public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
-    private String username;
-    private String userEmail;
-    private String userPassword;
-    private String userAge;
+    private User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,69 +48,23 @@ public class LoginFragment extends Fragment {
 
         setupListeners();
 
-        // TextWatcher para el manejo de los errores y habilitar el button logIn
-        binding.tietUsernameTyped.addTextChangedListener(textWatcher());
-        binding.tietPasswordTyped.addTextChangedListener(textWatcher());
-
-        validateUserData();
-
     }
 
+    // Recupera el dato User del bundle de la clave "userData"
     public void recoverData() {
-        // Recupera los datos del bundle de la clave "userData"
-        getParentFragmentManager().setFragmentResultListener("userDataFromRegister", this, (requestKey, result) -> {
-            username = result.getString("username");
-            userEmail = result.getString("email");
-            userPassword = result.getString("password");
-            userAge = result.getString("age");
+        getParentFragmentManager().setFragmentResultListener("userDataFromRegister", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                // Recupera el objeto User
+                user = result.getParcelable("user");
 
-            Snackbar.make(binding.getRoot(), "Nombre: " + username + ", Email: " + userEmail + ", Password: " + userPassword + ", Edad: " + userAge, Snackbar.LENGTH_LONG).show();
+                if (user != null) {
+                    Snackbar.make(binding.getRoot(), "Nombre: " + user.getUserName() + ", Email: " + user.getUserEmail() +
+                            ", Password: " + user.getUserPassword() + ", Edad: " + user.getUserAge(), Snackbar.LENGTH_LONG).show();
 
-            Log.d("Depurando", "Datos Recibidos al Login: Username: " + username + ", Email: " + userEmail + ", Password: " + userPassword + ", Edad: " + userAge);
-
-            validateUserData();
+                }
+            }
         });
-    }
-
-    public void validateUserData() {
-        // Recuperar el texto digitado en los textInputEditText
-        String usernameTyped = binding.tietUsernameTyped.getText().toString().trim();
-        String passwordTyped = binding.tietPasswordTyped.getText().toString().trim();
-
-        // Verificacion que los editTexts estén correctamente escritos
-        boolean isUsernameValid = binding.tietUsernameTyped.getText().toString().matches("[a-z]+");
-        boolean isUserNameCorrect = binding.tietUsernameTyped.getText().toString().equals(username);
-        boolean isPasswordValid = binding.tietPasswordTyped.getText().toString().length() >= 5;
-        boolean isPasswordCorrect = binding.tietPasswordTyped.getText().toString().equals(userPassword);
-
-        binding.tilUsernameTyped.setError(isUsernameValid ? null : getString(R.string.errorUsername));
-        binding.tilPasswordTyped.setError(isPasswordValid ? null : getString(R.string.errorCharacterers));
-        binding.tilPasswordTyped.setError(isPasswordCorrect ? null : getString(R.string.errorPasswordLogIn));
-
-        //Cambiar esto antes de enviar la tarea
-        //binding.bLogIn.setEnabled(isUsernameValid && isUserNameCorrect && isPasswordValid && isPasswordCorrect);
-        binding.bLogIn.setEnabled(true);
-    }
-
-
-    private TextWatcher textWatcher() {
-        return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                validateUserData();
-            }
-        };
-
     }
 
     private void setupListeners() {
@@ -125,10 +78,16 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                String usernameTyped = binding.tietUsernameTyped.getText().toString().trim();
-                String passwordTyped = binding.tietPasswordTyped.getText().toString().trim();
-
-                sendUserData(usernameTyped, passwordTyped);
+                if (user != null) {
+                    if (isCorrectUser()) {
+                        sendUserData(user);
+                    } else {
+                        Snackbar.make(binding.getRoot(), getString(R.string.errorPasswordLogIn), Snackbar.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Snackbar.make(binding.getRoot(), "No existe ningún usuario, debe de registrarse primero", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -138,16 +97,24 @@ public class LoginFragment extends Fragment {
         binding.btnGoogle.setOnClickListener(showComingSoonMessage);
     }
 
+    public boolean isCorrectUser(){
+
+        String usernameTyped = String.valueOf(binding.tietUsernameTyped.getText()).trim();
+        String passwordTyped = String.valueOf(binding.tietPasswordTyped.getText()).trim();
+
+        // Validar usuario correcto
+        return usernameTyped.equals(String.valueOf(user.getUserName())) && passwordTyped.equals(String.valueOf(user.getUserPassword()));
+    }
+
     //Enviar los datos a la home
-    public void sendUserData(String textUsername, String textPassword) {
+    public void sendUserData(User user) {
         // Ir a la home  con los datos que se introdujo
         Bundle userData = new Bundle();
-        userData.putString("username", textUsername);
-        userData.putString("password", textPassword);
+        userData.putParcelable("user", user);
 
         getParentFragmentManager().setFragmentResult("userDataFromLogin", userData);
 
-        Log.d("Depurando", "Datos Enviados al Login: Username: " + textUsername + ", Password: " + textPassword);
+        Log.d("Depurando", "Datos Enviados al Login: Username: " + user.getUserName() + ", Password: " + user.getUserPassword());
 
         ((LoginActivity) getActivity()).changeActivity(new HomeActivity());
 

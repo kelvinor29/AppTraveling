@@ -16,17 +16,18 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:menu="@menu/toolbar_home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/toolbar_home"
         app:navigationIcon="@drawable/ic_menu_burger"
-        app:title="@string/home"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="@string/home"
         app:titleCentered="true"
         app:titleTextColor="@color/white" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tb_home"
+        style="@style/Widget.MaterialComponents.TabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -42,14 +43,21 @@
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription=""
+            android:contentDescription="@string/upcoming_meetups"
             android:icon="@drawable/ic_camera" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription=""
-            android:icon="@drawable/ic_star_shape" />
+            android:focusedByDefault="true"
+            android:icon="@drawable/ic_home" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription=""
+            android:icon="@drawable/ic_car_nonshape" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
@@ -70,8 +78,8 @@
         android:name="com.kelvin.apptraveling.feature.home.fragment.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tb_home" />
 

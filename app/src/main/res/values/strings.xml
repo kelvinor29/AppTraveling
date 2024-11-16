@@ -23,7 +23,7 @@
     <!-- LogIn Fragment -->
     <string name="log_in">LogIn</string>
     <string name="password">Password</string>
-    <string name="forgot_password">Fortgot Password?</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="have_an_account">Do you have an Account?</string>
     <string name="create_new">Create New</string>
     <string name="log_in_to_your_account">Login To Your Account</string>
@@ -35,7 +35,6 @@
     <string name="errorPasswordLogIn">Password doesn\'t match</string>
 
     <!-- Register Fragment -->
-
     <string name="back">Back</string>
     <string name="username">Username</string>
     <string name="camera">Camera</string>
@@ -43,11 +42,13 @@
     <string name="privacy">Privacy Policy</string>
     <string name="see_terms">Terms and conditions</string>
     <string name="how_old_are_you">How old are you?</string>
-    <string name="errorUsername">It can only contain letters</string>
     <string name="errorEmail">Oops, I don\'t think that\'s right, check it!</string>
-    <string name="errorEmptyInput">You must fill in this field</string>
+    <string name="errorEmptyInput">You must complete this field</string>
+    <string name="errorAge">Ups, you can\'t use this App</string>
+    <string name="errorEmptyRegister">Sorry, you must complete all the fields</string>
 
-    <string-array name="ages">
+
+    <string-array name="options_ages">
         <item>0–5</item>
         <item>6–11</item>
         <item>12–17</item>
@@ -59,5 +60,8 @@
     <string name="rentCar">Rent a Car</string>
     <string name="email">Email</string>
     <string name="find_the_perfect_roommate">Find the Perfect Roommate</string>
+    <string name="favorites">Favorites</string>
+    <string name="places">Places</string>
+    <string name="profile">Profile</string>
 
 </resources>

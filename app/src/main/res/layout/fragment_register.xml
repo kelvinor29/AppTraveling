@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
     tools:context=".feature.login.fragment.RegisterFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -152,7 +153,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_button_background"
                 android:backgroundTint="@color/primary_light"
-                android:clickable="true"
                 android:focusable="false"
                 android:padding="13dp" />
 
@@ -166,10 +166,10 @@
             android:layout_margin="16dp"
             android:background="@drawable/rounded_button_background"
             android:backgroundTint="@color/primary"
-            android:enabled="false"
             android:paddingHorizontal="40dp"
             android:text="@string/register"
             android:textAllCaps="false"
+            android:enabled="false"
             app:layout_constraintBottom_toTopOf="@+id/cl_privacy"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"

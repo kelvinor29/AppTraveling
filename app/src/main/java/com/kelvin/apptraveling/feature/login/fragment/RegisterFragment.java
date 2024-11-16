@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,11 +20,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
 import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.databinding.FragmentRegisterBinding;
+import com.kelvin.apptraveling.database.User;
 import com.kelvin.apptraveling.feature.login.activity.LoginActivity;
 
-import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class RegisterFragment extends Fragment {
 
@@ -41,6 +46,7 @@ public class RegisterFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater, container, false);
+        setOptionsAges();
 
         return binding.getRoot();
     }
@@ -58,15 +64,17 @@ public class RegisterFragment extends Fragment {
         toolBarFunctions();
         setHasOptionsMenu(true); // Funcion para permitir el manejo del menú de opciones
 
-        // Añadir TextWatchers para el manejo de cambios en el textInputEditTexts
-        binding.tietUsername.addTextChangedListener(textWatcher());
-        binding.tietEmail.addTextChangedListener(textWatcher());
-        binding.tietPassword.addTextChangedListener(textWatcher());
-        binding.actvAge.addTextChangedListener(textWatcher());
-
     }
 
-    // Este es un ejemplo del manejo del menú de opciones
+    private void setOptionsAges() {
+        String[] ageOptions = getResources().getStringArray(R.array.options_ages);
+
+        // Adaptador
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(requireActivity(), android.R.layout.simple_spinner_dropdown_item, ageOptions);
+        binding.actvAge.setAdapter(arrayAdapter);
+    }
+
+    // Este es un ejemplo del manejo del menú de opciones (Retroceder desde register)
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -80,8 +88,9 @@ public class RegisterFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
+    // Configuracion del Toolbar (Up Button)
     public void toolBarFunctions() {
-        // Toolbar (Up Button)
+        // Utilizacion del la toolbar del Activity principal
         ((LoginActivity) getActivity()).setSupportActionBar(binding.toolbar);
         ((LoginActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getActivity().setTitle(R.string.register);
@@ -120,23 +129,103 @@ public class RegisterFragment extends Fragment {
     public void listeners() {
 
         // Button Register
-        binding.bRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Recupera los datos de los EditText en el momento del click
-                String textPassword = binding.tietPassword.getText().toString();
-                String textUsername = binding.tietUsername.getText().toString();
-                String textEmail = binding.tietEmail.getText().toString();
-                String textAge = binding.actvAge.getText().toString();
+        binding.bRegister.setOnClickListener(v -> {
 
-                sendDataUser(textUsername, textEmail, textPassword, textAge);
+            if (validateFields()) {
+
+                User user = new User(
+                        String.valueOf(binding.tietUsername.getText()).trim(),
+                        String.valueOf(binding.tietEmail.getText()).trim(),
+                        String.valueOf(binding.tietPassword.getText()).trim(),
+                        String.valueOf(binding.actvAge.getText()).trim());
+
+                // Enviar los datos al apartado del login
+                sendDataUser(user);
+            }
+            else {
+                Snackbar.make(binding.getRoot(), getString(R.string.errorEmptyRegister), Snackbar.LENGTH_LONG).show();
+            }
+
+        });
+
+        // Validaciones de los datos del usuario a tiempo real
+        // Validacion del nombre de usuario
+        binding.tietUsername.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Pattern pattern = Pattern.compile("[a-zA-Z]+");
+
+                if (isFieldEmpty(s, binding.tilUsername))
+                    return;
+
+                if (!pattern.matcher(String.valueOf(binding.tietUsername.getText()).trim()).matches()) {
+                    binding.tilUsername.setError(getString(R.string.errorEmail));
+                } else {
+                    binding.tilUsername.setError(null);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
 
-    }
+        // Validacion del email
+        binding.tietEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
 
-    private TextWatcher textWatcher() {
-        return new TextWatcher() {
+                    if (isFieldEmpty(String.valueOf(binding.tietEmail.getText()).trim(), binding.tilUsername))
+                        return;
+
+                    if (!Patterns.EMAIL_ADDRESS.matcher(String.valueOf(binding.tietEmail.getText()).trim()).matches()) {
+                        binding.tilEmail.setError(getString(R.string.errorEmail));
+                    } else {
+                        binding.tilEmail.setError(null);
+                    }
+
+                }
+            }
+        });
+
+        // Validacion de contraseña
+        binding.tietPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (isFieldEmpty(s, binding.tilPassword))
+                    return;
+
+                if (s.toString().length() < 5) {
+                    binding.tilPassword.setError(getString(R.string.errorCharacterers));
+                } else {
+                    binding.tilPassword.setError(null);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        addTextWatcher();
+
+        // Validacion de años
+        binding.actvAge.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -145,59 +234,91 @@ public class RegisterFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                if (isFieldEmpty(s, binding.tietAge))
+                    return;
+
+                if (!s.toString().equals("+18")) {
+                    binding.tietAge.setError(getString(R.string.errorAge));
+                    binding.bRegister.setEnabled(false);
+                } else {
+                    binding.tietAge.setError(null);
+                    binding.bRegister.setEnabled(true);
+                }
+
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                validateFields();
+
+            }
+        });
+
+
+    }
+
+    private void addTextWatcher(){
+        TextWatcher textsWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                boolean isEnabled = !String.valueOf(binding.tietUsername.getText()).trim().isEmpty()
+                        && !String.valueOf(binding.tietEmail.getText()).trim().isEmpty()
+                        && !String.valueOf(binding.tietPassword.getText()).trim().isEmpty()
+                        && !String.valueOf(binding.actvAge.getText()).trim().isEmpty();
+
+                binding.bRegister.setEnabled(isEnabled);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         };
 
-    }
-
-    public void validateFields() { // Activar el button de register para avanzar con el logueo
-
-        // Recuperar el array string de strings.xml
-        String[] ageArray = getResources().getStringArray(R.array.ages);
-        // Crear adapter con los datos de el array string
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_dropdown_item_1line, ageArray);
-        // Asigar el adapter al AutoCompleteTextView
-        binding.actvAge.setAdapter(adapter);
-
-        // Verificar que todos los campos estén correctamente llenos
-        boolean isUsernameValid = binding.tietUsername.getText().toString().matches("[a-z]+");
-        boolean isEmailValid = android.util.Patterns.EMAIL_ADDRESS.matcher(binding.tietEmail.getText().toString().trim()).matches();
-        boolean isPasswordValid = binding.tietPassword.getText().toString().length() >= 5;
-        boolean isAgeValid = binding.actvAge.getText().toString().equals("+18");
-
-        // Establecer errores si no son válidos
-        binding.tilUsername.setError(isUsernameValid ? null : getString(R.string.errorUsername));
-        binding.tietEmail.setError(isEmailValid ? null : "Formato de correo electrónico inválido");
-        binding.tilPassword.setError(isPasswordValid ? null : "Debe de contener al menos 5 carácteres");
-        binding.actvAge.setOnItemClickListener(((parent, view, position, id) -> {
-            String selectedAge = ageArray[position];
-
-            binding.tietAge.setError(Objects.equals(selectedAge, ageArray[3]) ? null : "Ups, esta App no es para ti!");
-
-        }));
-
-        // Habilitar o deshabilitar el button
-        binding.bRegister.setEnabled(isUsernameValid && isEmailValid && isPasswordValid && isAgeValid);
+        binding.tietUsername.addTextChangedListener(textsWatcher);
+        binding.tietEmail.addTextChangedListener(textsWatcher);
+        binding.tietPassword.addTextChangedListener(textsWatcher);
+        binding.actvAge.addTextChangedListener(textsWatcher);
 
     }
 
-    public void sendDataUser(String textUsername, String textEmail, String textPassword, String textAge) { // Funcion que abarca lo necesario para ir al login
+    // Validar si el campo esta vacio para mostrar el error
+    public boolean isFieldEmpty(CharSequence text, TextInputLayout tiLayout) {
+        if (text.toString().trim().isEmpty()) {
+            tiLayout.setError(getString(R.string.errorEmptyInput));
+            return true;
+        } else {
+            tiLayout.setError(null);
+            return false;
+        }
+    }
+
+    public boolean validateFields() {
+
+        return binding.tilUsername.getError() == null && binding.tilEmail.getError() == null
+                && binding.tilPassword.getError() == null && binding.tietAge.getError() == null
+                && !String.valueOf(binding.tietUsername.getText()).trim().isEmpty()
+                && !String.valueOf(binding.tietEmail.getText()).trim().isEmpty()
+                && !String.valueOf(binding.tietPassword.getText()).trim().isEmpty()
+                && !String.valueOf(binding.actvAge.getText()).trim().isEmpty();
+    }
+
+    public void sendDataUser(User user) { // Funcion que abarca lo necesario para ir al login
 
         // Ir al Login nuevamente con los datos que se introdujo
         Bundle userData = new Bundle();
-        userData.putString("username", textUsername);
-        userData.putString("email", textEmail);
-        userData.putString("password", textPassword);
-        userData.putString("age", textAge);
+        userData.putParcelable("user", user);
 
+        // Enviar el resultado al otro fragment
         getParentFragmentManager().setFragmentResult("userDataFromRegister", userData);
 
-        Log.d("Depurando", "Datos Enviados al Login: Username: " + textUsername + ", Email: " + textEmail + ", Password: " + textPassword + ", Edad: " + textAge);
+        Log.d("Depurando", "Datos Enviados al Login: Username: " + user.getUserName() + ", Email: " + user.getUserEmail() + ", Password: "
+                + user.getUserPassword() + ", Edad: " + user.getUserAge());
 
         ((LoginActivity) getActivity()).backToLoginActivity();
     }

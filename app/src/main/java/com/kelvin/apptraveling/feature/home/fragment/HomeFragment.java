@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.kelvin.apptraveling.databinding.FragmentHomeBinding;
+import com.kelvin.apptraveling.feature.home.domain.Car;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
