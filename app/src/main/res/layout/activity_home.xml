@@ -50,13 +50,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription=""
-            android:focusedByDefault="true"
-            android:icon="@drawable/ic_home" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription=""
             android:icon="@drawable/ic_car_nonshape" />
 
         <com.google.android.material.tabs.TabItem
@@ -73,14 +66,21 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.kelvin.apptraveling.feature.home.fragment.HomeFragment"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_home"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_home" />
+        app:layout_constraintTop_toBottomOf="@+id/tb_home" />
+
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fragmentContainerView"-->
+<!--        android:name="com.kelvin.apptraveling.feature.home.fragment.HomeFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/tb_home" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

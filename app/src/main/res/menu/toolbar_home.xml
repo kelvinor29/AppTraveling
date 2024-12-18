@@ -10,12 +10,4 @@
         android:title="@string/eurodisney"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/car_nav"
-        android:contentDescription="@string/eurodisney"
-        android:icon="@drawable/ic_car"
-        android:iconTint="@color/white"
-        android:title="@string/rentCar"
-        app:showAsAction="ifRoom" />
-
 </menu>

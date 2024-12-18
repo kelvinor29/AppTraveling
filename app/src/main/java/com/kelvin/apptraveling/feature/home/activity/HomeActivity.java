@@ -8,9 +8,13 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.databinding.ActivityHomeBinding;
+import com.kelvin.apptraveling.feature.home.adapter.TabsHomeAdapter;
 import com.kelvin.apptraveling.feature.home.fragment.RentCarFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar); // Funcion que convierte de toolbar a actionbar
 
+        setupTabsHome();
     }
 
     @Override
@@ -45,21 +50,36 @@ public class HomeActivity extends AppCompatActivity {
             Intent goToUrl = new Intent(Intent.ACTION_VIEW, Uri.parse(urlDisney));
             startActivity(goToUrl);
 
-            return true;
-        } else if (itemMenu == R.id.car_nav) {
-
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainerView, new RentCarFragment()) // Aqui remplaza el fragment al otro
-                    .addToBackStack(null)
-                    .commit();
-
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     // Asignar al TabLayout
+    public void setupTabsHome(){
+        TabsHomeAdapter adapter = new TabsHomeAdapter(this);
+        binding.vpHome.setAdapter(adapter);
+
+        new TabLayoutMediator(binding.tbHome, binding.vpHome, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position) {
+                    case 0:
+                        tab.setIcon(R.drawable.ic_camera);
+                        tab.setContentDescription(getString(R.string.upcoming_meetups));
+                        break;
+                    case 1:
+                        tab.setIcon(R.drawable.ic_car_nonshape);
+                        break;
+                    case 2:
+                        tab.setIcon(R.drawable.ic_mountains);
+                        break;
+                    case 3:
+                        tab.setIcon(R.drawable.ic_user);
+                        break;
+                }
+            }
+        }).attach();
+    }
 
 }

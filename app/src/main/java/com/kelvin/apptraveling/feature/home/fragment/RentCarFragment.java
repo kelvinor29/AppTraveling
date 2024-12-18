@@ -29,10 +29,15 @@ public class RentCarFragment extends Fragment {
         binding = FragmentRentCarBinding.inflate(inflater, container, false);
 
         CarsProvider carsList = new CarsProvider();
-        binding.rvCars.setHasFixedSize(true);
         binding.rvCars.setAdapter(new CarsAdapter(carsList.getCarsList()));
+
         return binding.getRoot();
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }

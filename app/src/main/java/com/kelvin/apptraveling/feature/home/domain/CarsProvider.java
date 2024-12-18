@@ -1,5 +1,8 @@
 package com.kelvin.apptraveling.feature.home.domain;
 
+import android.nfc.Tag;
+import android.util.Log;
+
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 
@@ -32,7 +35,7 @@ public class CarsProvider {
     }
 
     public CarsProvider() {
-        carsList.add(new Car("Classic Car", 34.0f, new CarFeatures(R.color.classicCar, R.drawable.img_vehicle_classic_car)));
+        carsList.add(new Car("Classic Car", 34.0f, new CarFeatures(R.color.classicCar, R.drawable.img_vehicle_classic_car) ));
         carsList.add(new Car("Sport Car", 55.0f, new CarFeatures(R.color.sportCar, R.drawable.img_vehicle_sport_car)));
         carsList.add(new Car("Flying Car", 500.0f, new CarFeatures(R.color.flyingCar, R.drawable.img_vehicle_flying_car)));
         carsList.add(new Car("Electric Car", 45.0f, new CarFeatures(R.color.electricCar, R.drawable.img_vehicle_electric_car)));
@@ -41,6 +44,7 @@ public class CarsProvider {
         carsList.add(new Car("AirPlane", 11.0f, new CarFeatures(R.color.airPlane, R.drawable.img_vehicle_air_plain)));
         carsList.add(new Car("Bus", 14.0f, new CarFeatures(R.color.busCar, R.drawable.img_vehicle_bus)));
     }
+
 
     public ArrayList<Car> getCarsList() {
         return carsList;
