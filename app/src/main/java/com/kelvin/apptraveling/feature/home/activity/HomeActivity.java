@@ -1,24 +1,34 @@
 package com.kelvin.apptraveling.feature.home.activity;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.databinding.ActivityHomeBinding;
 import com.kelvin.apptraveling.feature.home.adapter.TabsHomeAdapter;
-import com.kelvin.apptraveling.feature.home.fragment.RentCarFragment;
+
 
 public class HomeActivity extends AppCompatActivity {
 
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
     private ActivityHomeBinding binding;
 
     @Override
@@ -29,8 +39,12 @@ public class HomeActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar); // Funcion que convierte de toolbar a actionbar
 
+        checkLocationPermition();
+
         setupTabsHome();
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     // Asignar al TabLayout
-    public void setupTabsHome(){
+    public void setupTabsHome() {
         TabsHomeAdapter adapter = new TabsHomeAdapter(this);
         binding.vpHome.setAdapter(adapter);
 
@@ -82,4 +96,39 @@ public class HomeActivity extends AppCompatActivity {
         }).attach();
     }
 
+    // Validacion de permisos de ubicacion
+    public void checkLocationPermition() {
+
+        // Validacion si ya tiene el permiso de ubicacion
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Solicitar el permiso al usuario
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    // Verificacion de permisos
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+
+            // Validar si el permiso fue concedido
+            if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+
+                // Notificarle al usuario
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("WARNING");
+                builder.setMessage("Cannot proceed without location permission.");
+
+                builder.setPositiveButton("Ok", (dialog, which) -> finish());
+
+                builder.setCancelable(false);
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+            }
+        }
+    }
 }

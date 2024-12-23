@@ -22,28 +22,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_hi_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/hi"
-                android:textAppearance="?textAppearanceSubtitle1"
-                android:textColor="@color/texts"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="@string/hi" />
-
-            <TextView
                 android:id="@+id/tv_UpcomingMeetups"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/upcoming_meetups"
                 android:textAppearance="?textAppearanceHeadline5"
                 android:textColor="@color/texts"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_hi_user" />
+                android:textStyle="bold" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_hotel1"
@@ -53,10 +40,7 @@
                 android:layout_marginTop="5dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="4dp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,10 +85,7 @@
                 android:layout_marginHorizontal="15dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -150,10 +131,7 @@
                 android:layout_marginHorizontal="15dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="4dp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"

@@ -37,7 +37,7 @@ android {
 }
 
 dependencies {
-
+	implementation("com.facebook.shimmer:shimmer:0.5.0")
 	implementation(libs.appcompat)
 	implementation(libs.material)
 	implementation(libs.activity)

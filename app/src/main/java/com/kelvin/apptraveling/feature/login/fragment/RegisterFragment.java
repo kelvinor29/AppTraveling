@@ -1,5 +1,7 @@
 package com.kelvin.apptraveling.feature.login.fragment;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -16,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,7 +36,6 @@ import java.util.regex.Pattern;
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
-    private static final int pic_id = 1;
 
     @Override
 
@@ -106,24 +109,24 @@ public class RegisterFragment extends Fragment {
         });
     }
 
+    // Agregar foto al ImageView
+    ActivityResultLauncher<Intent> activityResultLancherCamara = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+        if (result.getResultCode() == RESULT_OK) {
+            Intent data = result.getData();
+
+            // Manejo de la imagen
+            Bitmap picture = (Bitmap) data.getExtras().get("data");
+            binding.ivPicProfile.setImageBitmap(picture);
+        }
+    });
+
     //Funcion para abrir la camara y tomar la captura
     public void openCameraToPic() {
         binding.ivPicProfile.setOnClickListener(v -> {
             Intent openCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(openCamera, pic_id);
+            activityResultLancherCamara.launch(openCamera);
         });
 
-    }
-
-    // Agregar foto al ImageView
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == pic_id) {
-            Bitmap picture = (Bitmap) data.getExtras().get("data");
-            binding.ivPicProfile.setImageBitmap(picture);
-        }
     }
 
     public void listeners() {
@@ -287,7 +290,7 @@ public class RegisterFragment extends Fragment {
 
     }
 
-    // Validar si el campo esta vacio para mostrar el error
+    // Validar si el campo de una casilla esta vacio para mostrar el error
     public boolean isFieldEmpty(CharSequence text, TextInputLayout tiLayout) {
         if (text.toString().trim().isEmpty()) {
             tiLayout.setError(getString(R.string.errorEmptyInput));
@@ -308,7 +311,8 @@ public class RegisterFragment extends Fragment {
                 && !String.valueOf(binding.actvAge.getText()).trim().isEmpty();
     }
 
-    public void sendDataUser(User user) { // Funcion que abarca lo necesario para ir al login
+    // Funcion que abarca lo necesario para ir al login
+    public void sendDataUser(User user) {
 
         // Ir al Login nuevamente con los datos que se introdujo
         Bundle userData = new Bundle();
