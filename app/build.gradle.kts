@@ -37,6 +37,8 @@ android {
 }
 
 dependencies {
+	implementation("com.squareup.retrofit2:retrofit:2.9.0")
+	implementation("com.squareup.retrofit2:converter-gson:2.9.0") // Libreria para traducir de json a objetos java
 	implementation("com.facebook.shimmer:shimmer:0.5.0")
 	implementation(libs.appcompat)
 	implementation(libs.material)

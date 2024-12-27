@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLogInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
     }
 
     // Codigo para pasar de un fragment a otro desde el mismo activity

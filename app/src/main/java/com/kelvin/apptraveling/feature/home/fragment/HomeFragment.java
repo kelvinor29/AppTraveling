@@ -31,8 +31,8 @@ public class HomeFragment extends Fragment {
         getParentFragmentManager().setFragmentResultListener("userDataFromLogin", this, ((requestKey, result) -> {
             username = result.getString("username");
 
-            Log.d("Depurando", "Datos recibidos en HomeActivity: Username: " + username);
-            Snackbar.make(binding.getRoot(), "Nombre: " + username, Snackbar.LENGTH_LONG).show();
+            Log.d("Depurando", "Data received: Username: " + username);
+            Snackbar.make(binding.getRoot(), "Name: " + username, Snackbar.LENGTH_LONG).show();
         }));
 
         return binding.getRoot();

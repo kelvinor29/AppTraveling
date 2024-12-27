@@ -1,4 +1,4 @@
-package com.kelvin.apptraveling.database;
+package com.kelvin.apptraveling.data.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
