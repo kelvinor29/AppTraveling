@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.databinding.CardViewCarsBinding;
-import com.kelvin.apptraveling.feature.home.domain.Car;
+import com.kelvin.apptraveling.data.models.Car;
 
 import java.util.List;
 

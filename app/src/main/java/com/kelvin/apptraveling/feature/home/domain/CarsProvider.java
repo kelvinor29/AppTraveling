@@ -1,12 +1,10 @@
 package com.kelvin.apptraveling.feature.home.domain;
 
-import android.nfc.Tag;
-import android.util.Log;
-
 import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 
 import com.kelvin.apptraveling.R;
+import com.kelvin.apptraveling.data.models.Car;
 
 import java.util.ArrayList;
 

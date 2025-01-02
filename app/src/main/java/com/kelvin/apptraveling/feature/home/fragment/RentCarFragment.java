@@ -17,7 +17,7 @@ import com.kelvin.apptraveling.feature.home.domain.CarsProvider;
 
 public class RentCarFragment extends Fragment {
 
-   private FragmentRentCarBinding binding;
+    private FragmentRentCarBinding binding;
     private CarsAdapter carsAdapter;
 
 
@@ -34,7 +34,7 @@ public class RentCarFragment extends Fragment {
         binding = FragmentRentCarBinding.inflate(inflater, container, false);
 
         CarsProvider carsList = new CarsProvider();
-        carsAdapter = new CarsAdapter(carsList.getCarsList()); // Asigna el adaptador a la variable
+        carsAdapter = new CarsAdapter(carsList.getCarsList());
 
         binding.rvCars.setAdapter(carsAdapter);
 

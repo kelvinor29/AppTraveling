@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="hotel"
+            type="com.kelvin.apptraveling.data.models.Hotel" />
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_hotels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".data.models.Hotel">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/sm_cards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:shimmer_auto_start="true">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="5dp"
+                app:cardUseCompatPadding="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_cardv_background_s"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_img_hotel_s"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:adjustViewBounds="true"
+                        android:background="@color/grey"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_price_s"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:background="@drawable/shape_background_car_list"
+                        android:backgroundTint="@color/white"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toEndOf="@id/cl_cardv_background_s"
+                        app:layout_constraintTop_toTopOf="@id/cl_cardv_background_s" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_hotel_name_s"
+                        android:layout_width="230dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/grey"
+                        android:ellipsize="end"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_img_hotel_s" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/ll_location_s"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="13dp"
+                        android:backgroundTint="@color/white"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_hotel_name_s"
+                        app:layout_constraintTop_toBottomOf="@id/tv_hotel_name_s">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:background="@drawable/ic_location"
+                            android:backgroundTint="@color/cardview_dark_background" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_location_s"
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:background="@color/grey"
+                            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                            android:textColor="@color/text_grey" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/tv_ic_rating_s"
+                        android:layout_width="29dp"
+                        android:layout_height="29dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/ic_yellow_star"
+                        android:backgroundTint="@color/white"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_hotel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_cardv_background"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_img_hotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/grey"
+                    app:imageUrl="@{hotel.optimizedThumbUrls.srpDesktop}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/shape_background_car_list"
+                    android:backgroundTint="@color/white"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="@{hotel.ratePlan.price.current + `/night`}"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="@id/cl_cardv_background"
+                    app:layout_constraintTop_toTopOf="@id/cl_cardv_background"
+                    tools:hint="0 €/night" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_hotel_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:text="@{hotel.name}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_img_hotel"
+                    tools:hint="Hotel's name" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="13dp"
+                    android:backgroundTint="@color/white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_hotel_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_hotel_name">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_marginEnd="5dp"
+                        android:background="@drawable/ic_location" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{hotel.address.streetAddress + ` | ` + hotel.address.locality}"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                        android:textColor="@color/text_grey"
+                        tools:hint="Street Address | Locality" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tv_ic_rating"
+                    android:layout_width="29dp"
+                    android:layout_height="29dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/ic_yellow_star"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{hotel.guestReviews.unformattedRating}"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_ic_rating"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_ic_rating"
+                    app:layout_constraintStart_toStartOf="@+id/tv_ic_rating"
+                    app:layout_constraintTop_toTopOf="@+id/tv_ic_rating"
+                    tools:hint="4.5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</layout>

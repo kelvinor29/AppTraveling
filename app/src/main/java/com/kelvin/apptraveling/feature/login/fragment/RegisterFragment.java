@@ -28,7 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.databinding.FragmentRegisterBinding;
-import com.kelvin.apptraveling.data.model.User;
+import com.kelvin.apptraveling.data.models.User;
 import com.kelvin.apptraveling.feature.login.activity.LoginActivity;
 
 import java.util.regex.Pattern;

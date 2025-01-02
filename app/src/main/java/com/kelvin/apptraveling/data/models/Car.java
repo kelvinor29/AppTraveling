@@ -1,4 +1,6 @@
-package com.kelvin.apptraveling.feature.home.domain;
+package com.kelvin.apptraveling.data.models;
+
+import com.kelvin.apptraveling.feature.home.domain.CarsProvider;
 
 import java.util.Locale;
 

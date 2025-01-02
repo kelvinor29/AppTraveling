@@ -12,12 +12,6 @@
     <string name="la_coruna">" La coruña 1 - Yea"</string>
     <string name="hi">Hi </string>
     <string name="upcoming_meetups">Upcoming Meetups</string>
-    <string name="madives_3_weeks">Madives - 3 Weeks</string>
-    <string name="city_of_los_angeles">City of Los Angeles</string>
-    <string name="beach_vacation">Beach Vacation</string>
-    <string name="usa_los_angeles_2_weeks">USA, Los Angeles - 2 Weeks</string>
-    <string name="tokio_school" translatable="false">Tokio School</string>
-    <string name="home" translatable="false">Home</string>
     <string name="eurodisney" translatable="false">Euro DISNEY</string>
 
     <!-- LogIn Fragment -->
@@ -63,5 +57,8 @@
     <string name="favorites">Favorites</string>
     <string name="places">Places</string>
     <string name="profile">Profile</string>
+
+    <!-- Home Fragment -->
+    <string name="no_hotels_found">No hotels found.</string>
 
 </resources>

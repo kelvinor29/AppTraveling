@@ -1,11 +1,9 @@
 package com.kelvin.apptraveling.feature.home.adapter;
 
 import android.content.res.ColorStateList;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,9 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.snackbar.Snackbar;
-import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.databinding.CardViewCarsBinding;
-import com.kelvin.apptraveling.feature.home.domain.Car;
+import com.kelvin.apptraveling.data.models.Car;
 
 import java.util.ArrayList;
 

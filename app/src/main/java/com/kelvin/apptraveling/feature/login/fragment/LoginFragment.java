@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +25,11 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.kelvin.apptraveling.R;
 import com.kelvin.apptraveling.data.api.API;
-import com.kelvin.apptraveling.data.model.User;
-import com.kelvin.apptraveling.data.model.UserApi;
+import com.kelvin.apptraveling.data.models.User;
+import com.kelvin.apptraveling.data.models.UserApi;
 import com.kelvin.apptraveling.databinding.FragmentLoginBinding;
 import com.kelvin.apptraveling.feature.home.activity.HomeActivity;
 import com.kelvin.apptraveling.feature.login.activity.LoginActivity;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;

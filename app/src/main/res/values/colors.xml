@@ -10,6 +10,7 @@
     <color name="secondary">#008080</color>
     <color name="buttons">#008080</color>
     <color name="texts">#333333</color>
+    <color name="text_grey">#666666</color>
 
     <color name="transparent">#23FFFFFF</color>
     <color name="grey">#d2d2d2</color>

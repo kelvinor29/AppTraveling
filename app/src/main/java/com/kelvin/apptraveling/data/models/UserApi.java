@@ -1,4 +1,4 @@
-package com.kelvin.apptraveling.data.model;
+package com.kelvin.apptraveling.data.models;
 
 import com.google.gson.annotations.SerializedName;
 

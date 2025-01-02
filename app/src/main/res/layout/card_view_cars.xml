@@ -7,7 +7,7 @@
 
         <variable
             name="car"
-            type="com.kelvin.apptraveling.feature.home.domain.Car" />
+            type="com.kelvin.apptraveling.data.models.Car" />
 
     </data>
 
@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        tools:context=".feature.home.domain.Car">
+        tools:context=".data.models.Car">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/sv_cards"
@@ -87,7 +87,6 @@
 
 
         </com.facebook.shimmer.ShimmerFrameLayout>
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_car"

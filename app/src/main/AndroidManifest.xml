@@ -25,14 +25,13 @@
         android:theme="@style/Theme.AppTraveling"
         tools:targetApi="31">
         <activity
-
-            android:name=".feature.boarding.activity.OnBoardingActivity"
+            android:name=".feature.login.activity.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".feature.home.activity.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".feature.login.activity.LoginActivity"
+            android:name=".feature.boarding.activity.OnBoardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
