@@ -5,7 +5,9 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,12 +41,21 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private User user;
     PendingIntent pendingIntent;
+    SharedPreferences.Editor preferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentLoginBinding.inflate(inflater, container, false);
+
+        // Creacion de las preferencias
+        SharedPreferences preferencesRead = requireActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+        preferences = preferencesRead.edit();
+
+        // Cargar preferencias de login o asignar datos por defecto
+        User user = new User(preferencesRead.getString("username", ""), preferencesRead.getString("email", ""), preferencesRead.getString("password", ""), preferencesRead.getString("age", ""));
+        binding.setUser(user);
 
         return binding.getRoot();
     }
@@ -87,7 +98,6 @@ public class LoginFragment extends Fragment {
         // Lanzar al Home Activity
         binding.bLogIn.setOnClickListener(v -> {
             attemptLogin();
-
         });
 
         // Mostrar mensajes "Próximamente"
@@ -106,6 +116,7 @@ public class LoginFragment extends Fragment {
         } else {
             fetchUserFromApi(usernameTyped, passwordTyped);
         }
+
     }
 
     private boolean isValidUser(User user, String usernameTyped, String passwordTyped) {
@@ -154,11 +165,22 @@ public class LoginFragment extends Fragment {
         });
     }
 
+    // Guardar las preferencias de usuario y contraseña
+    private void savePreferences() {
+        // Guardar preferencias
+        if(binding.cbRememberMe.isChecked()){
+            preferences.putString("username", binding.tietUsernameTyped.getText().toString());
+            preferences.putString("password", binding.tietPasswordTyped.getText().toString());
+            preferences.apply();
+        }
+    }
 
     private void sendUserApiData(UserApi userApi) {
         Bundle data = new Bundle();
         data.putSerializable("userApi", userApi);
         getParentFragmentManager().setFragmentResult("userDataFromLogin", data);
+
+        savePreferences();
 
         showWelcomeNotification(userApi);
         navigateToHome();
@@ -176,7 +198,7 @@ public class LoginFragment extends Fragment {
         userData.putParcelable("user", user);
 
         getParentFragmentManager().setFragmentResult("userDataFromLogin", userData);
-
+        savePreferences();
         // Notificacion de bienvenida
         showWelcomeNotification(null);
 
