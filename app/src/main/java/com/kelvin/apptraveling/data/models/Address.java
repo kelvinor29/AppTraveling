@@ -1,6 +1,6 @@
 package com.kelvin.apptraveling.data.models;
 
-public class Address{
+public class Address {
     private String streetAddress;
     private String locality;
 
