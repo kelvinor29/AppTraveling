@@ -42,6 +42,9 @@ dependencies {
 	implementation("androidx.room:room-runtime:2.5.2")
 	annotationProcessor("androidx.room:room-compiler:2.5.2")
 
+    implementation("com.google.android.gms:play-services-maps:19.2.0")
+    implementation("androidx.fragment:fragment:1.6.2")
+
 	implementation(libs.glide) // Para cargar imagenes
 	implementation(libs.glide.v4132)
 	implementation(libs.retrofit)
