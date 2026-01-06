@@ -19,9 +19,15 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
     CardViewHotelsBinding binding;
     public List<Hotel> hotelList;
     private boolean isDataLoaded = false;
+    private OnHotelClickListener listener;
 
-    public HotelAdapter(List<Hotel> hotelList) {
+    public interface OnHotelClickListener {
+        void onHotelClick(Hotel hotel);
+    }
+
+    public HotelAdapter(List<Hotel> hotelList, OnHotelClickListener listener) {
         this.hotelList = hotelList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -37,6 +43,11 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
         Hotel hotel = hotelList.get(position);
         holder.bind(hotel);
 
+        holder.binding.cvHotel.setOnClickListener(v -> {
+            if (listener != null)
+                listener.onHotelClick(hotel);
+        });
+
         // Verificar y actualizar el estado de carga
         if (isDataLoaded) {
 
@@ -44,9 +55,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.HotelViewHol
             holder.binding.smCards.stopShimmer();
             holder.binding.smCards.setVisibility(View.GONE);
             holder.binding.cvHotel.setVisibility(View.VISIBLE);
-        }
-
-        else {
+        } else {
             // Mostrar el shimmer mientras se cargan los datos
             holder.binding.smCards.startShimmer();
             holder.binding.smCards.setVisibility(View.VISIBLE);
